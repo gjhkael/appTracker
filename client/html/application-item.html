@@ -1,0 +1,19 @@
+<img *ngIf="application.company.iconId!=0" src="{{connector.getFileUrl(application.company.iconId)}}" alt="{{application.company.name}} Icon">
+<div class="item">
+  <h3>{{application.company.name}}</h3>
+  <div class="info">
+    <div class="field">
+      <i>{{application.position}}</i>
+    </div>
+    <div class="field">
+      <b>Applied to</b>&nbsp;
+      <img src="images/{{application.appliedTo?'thumbsUp.png':'thumbsDwn.png'}}">
+    </div>
+    <div *ngIf="application.dateApplied" class="field">
+      <b>Date applied:</b>&nbsp; {{application.dateApplied | date:"EEE MMM d"}}
+    </div>
+    <div *ngIf="application.followUp" class="field">
+      <b>Follow up by:</b>&nbsp; {{application.followUp | date:"EEE MMM d"}}
+    </div>
+  </div>
+</div>

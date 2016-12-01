@@ -1,0 +1,11 @@
+<div class="app-wrap">
+    <div class="app-header">AppTracker</div>
+    <div class="app-frame">
+        <application-list *ngIf="applications" class="list-frame" [applications]="applications"
+                          (selectionChanged)="showDetails($event)"></application-list>
+
+        <application-details *ngIf="currentApplication" class="details-frame" [application]="currentApplication"
+                             (close)="closeDetails()"></application-details>
+
+    </div>
+</div>

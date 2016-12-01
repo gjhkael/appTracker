@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<context:component-scan base-package="com.podk.controllers" />
+	<mvc:annotation-driven />
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/appTracker" />
+		<property name="username" value="root" />
+		<property name="password" value="des3224" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>				
+				<value>com.podk.persistence.entity.Application</value>
+				<value>com.podk.persistence.entity.Company</value>
+				<value>com.podk.persistence.entity.ContactType</value>
+				<value>com.podk.persistence.entity.FileType</value>
+				<value>com.podk.persistence.entity.FileAsset</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+		
+	<bean id="applicationDao" class="com.podk.persistence.dao.impl.ApplicationDaoImpl"></bean>
+	<bean id="applicationServices" class="com.podk.services.impl.ApplicationServicesImpl"></bean>
+	<bean id="companyDao" class="com.podk.persistence.dao.impl.CompanyDaoImpl"></bean>
+	<bean id="companyServices" class="com.podk.services.impl.CompanyServicesImpl"></bean>
+	<bean id="contactTypeDao" class="com.podk.persistence.dao.impl.ContactTypeDaoImpl"></bean>
+	<bean id="contactTypeServic es" class="com.podk.services.impl.ContactTypeServicesImpl"></bean>
+	<bean id="fileTypeDao" class="com.podk.persistence.dao.impl.FileTypeDaoImpl"></bean>
+	<bean id="fileTypeServices" class="com.podk.services.impl.FileTypeServicesImpl"></bean>
+	<bean id="fileAssetDao" class="com.podk.persistence.dao.impl.FileAssetDaoImpl"></bean>
+	<bean id="fileAssetServices" class="com.podk.services.impl.FileAssetServicesImpl"></bean>
+</beans>

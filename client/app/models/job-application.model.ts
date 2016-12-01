@@ -1,0 +1,32 @@
+import {Company} from './company.model';
+import {ContactType} from "./contact-type";
+import {FileAsset} from "./file-asset.model";
+import {Identifiable} from "./identifiable.model";
+
+export class JobApplication extends Identifiable{
+    company: Company;
+    tag: string;
+    position: string;
+    appliedTo: boolean;
+    contactType: ContactType;
+    contactInfo: string;
+    dateApplied: Date;
+    followUp: Date;
+    applicationFiles: FileAsset[];
+    notes: string;
+
+    constructor(applicationJson?: any) {
+        super(applicationJson);
+        applicationJson = applicationJson || {};
+        this.company = applicationJson.company || new Company();
+        this.tag = applicationJson.tag || '';
+        this.position = applicationJson.position || '';
+        this.appliedTo = applicationJson.appliedTo || false;
+        this.contactType = applicationJson.contactType || new ContactType();
+        this.contactInfo = applicationJson.contactInfo || '';
+        this.dateApplied = applicationJson.dateApplied || new Date();
+        this.followUp = applicationJson.followUp || null;
+        this.applicationFiles = applicationJson.applicationFiles || null;
+        this.notes = applicationJson.notes || '';
+    }
+}

@@ -1,0 +1,40 @@
+<div *ngIf="!hideFilter" class="applicationsearch">
+    <div class="card search">
+        <div *ngIf="!hideFilter" class="filters ">
+            <h3>Filter</h3>
+            <input [(ngModel)]="companyTxt" placeholder="Company name">
+            <div [(ngModel)]="toggleSel" ngbRadioGroup name="radioBasic">
+                <label class="btn btn-primary">
+                    <input type="radio" value={{appliedTo}}>Applied to
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" value={{all}}>All
+                </label>
+                <label class="btn btn-primary">
+                    <input type="radio" value={{notAppliedTo}}>NOT Applied to
+                </label>
+            </div>
+        </div>
+        <div class="filter-show" (click)="hideFilter = true">
+            <img src="images/upCrt.png" alt="Close Filters">
+        </div>
+    </div>
+</div>
+<div *ngIf="hideFilter" class="filter-show filter-closed-margins" (click)="hideFilter = false">
+    <img src="images/dwnCrt.png" alt="Open Filters">
+</div>
+
+<div class="scroll-wrapper">
+    <ul *ngIf="companyTxt" class="applicationlist">
+        <li (click)="changeSelection(item); company='';" class="application"
+            *ngFor="let item of (applications) | text:companyTxt | toggle:toggleSel">
+            <application-item class="item-frame" [application]=item></application-item>
+        </li>
+    </ul>
+
+    <ul *ngIf="!companyTxt" class="applicationlist">
+        <li (click)="changeSelection(item);" class="application" *ngFor="let item of (applications) | toggle:toggleSel">
+            <application-item class="item-frame" [application]=item></application-item>
+        </li>
+    </ul>
+</div>

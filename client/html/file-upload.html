@@ -1,0 +1,28 @@
+<div class="mask">
+    <div class="dialog-content">
+        <div class="dialog-header">
+            <div class="close">
+                <img src="images/closeBtn.png" alt="Close" (click)="closeSelf()">
+            </div>
+            <div *ngIf="!isIcon">Add File</div>
+            <div *ngIf="isIcon">Add Icon</div>
+        </div>
+        <div class="dialog-body">
+            <div class="dialog-error" *ngIf="showError">{{error}}</div>
+            <input type="file" class="dialog-file" #file placeholder="Select a file">
+            <div class="dialog-type" *ngIf="fileTypes && !isIcon">
+                <div class="drop-label">File Type:</div>
+                <select class="drop-select" [(ngModel)]="fileTypeSel">
+                    <option *ngFor="let fileType of (fileTypes)" value="{{fileType.id}}">{{fileType.type}}</option>
+                </select>
+            </div>
+            <input *ngIf="!isIcon" type="text" class="dialog-description" [(ngModel)]="newFile.description"
+                   placeholder="File description">
+
+            <div class="dialog-buttons">
+                <button name="submit" (click)="submitFile(file.files[0])">Upload</button>
+                <button name="cancel" (click)="closeSelf()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
