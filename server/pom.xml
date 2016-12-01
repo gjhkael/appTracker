@@ -7,7 +7,6 @@
 	<groupId>com.podk</groupId>
 	<artifactId>AppTrackerServer</artifactId>
 	<version>0.0.1</version>
-	<!-- <packaging>war</packaging> -->
 
 	<name>AppTrackerServer</name>
 	<url>https://podk.com/apptracker</url>
