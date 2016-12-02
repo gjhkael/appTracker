@@ -1,5 +1,5 @@
 import {Company} from './company.model';
-import {ContactType} from "./contact-type";
+import {ContactType} from "./contact-type.model";
 import {FileAsset} from "./file-asset.model";
 import {Identifiable} from "./identifiable.model";
 
@@ -24,7 +24,7 @@ export class JobApplication extends Identifiable{
         this.appliedTo = applicationJson.appliedTo || false;
         this.contactType = applicationJson.contactType || new ContactType();
         this.contactInfo = applicationJson.contactInfo || '';
-        this.dateApplied = applicationJson.dateApplied || new Date();
+        this.dateApplied = applicationJson.dateApplied || null;
         this.followUp = applicationJson.followUp || null;
         this.applicationFiles = applicationJson.applicationFiles || null;
         this.notes = applicationJson.notes || '';

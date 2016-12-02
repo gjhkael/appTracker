@@ -22,6 +22,7 @@ var text_pipe_1 = require('../pipes/text.pipe');
 var toggle_pipe_1 = require('../pipes/toggle.pipe');
 var file_type_service_1 = require("../services/file-type.service");
 var server_connector_1 = require("../services/server-connector");
+var contact_type_service_1 = require("../services/contact-type.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -30,7 +31,9 @@ var AppModule = (function () {
             imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, ng_bootstrap_1.NgbModule.forRoot()],
             declarations: [app_component_1.AppComponent, application_details_component_1.ApplicationDetailsComponent, application_list_component_1.ApplicationListComponent, file_upload_component_1.FileUploadComponent, application_item_component_1.ApplicationItemComponent, text_pipe_1.SearchPipe, toggle_pipe_1.TogglePipe],
             bootstrap: [app_component_1.AppComponent],
-            providers: [server_connector_1.ServerConnector, { provide: file_type_service_1.FileTypeService, useClass: file_type_service_1.FileTypeService, useFactory: null }]
+            providers: [server_connector_1.ServerConnector,
+                { provide: file_type_service_1.FileTypeService, useClass: file_type_service_1.FileTypeService, useFactory: null },
+                { provide: contact_type_service_1.ContactTypeService, useClass: contact_type_service_1.ContactTypeService, useFactory: null }]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

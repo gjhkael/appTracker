@@ -14,9 +14,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var server_connector_1 = require('../services/server-connector');
 var job_application_model_1 = require("../models/job-application.model");
+var contact_type_service_1 = require("../services/contact-type.service");
 var ApplicationDetailsComponent = (function () {
-    function ApplicationDetailsComponent(connector) {
+    function ApplicationDetailsComponent(connector, contactTypeService) {
         this.connector = connector;
+        this.contactTypeService = contactTypeService;
         this.close = new core_1.EventEmitter();
         this.showAddFile = false;
         this.isIcon = false;
@@ -59,7 +61,7 @@ var ApplicationDetailsComponent = (function () {
             templateUrl: '../../html/application-details.html',
             styleUrls: ['../../css/app-details.css'],
         }), 
-        __metadata('design:paramtypes', [server_connector_1.ServerConnector])
+        __metadata('design:paramtypes', [server_connector_1.ServerConnector, contact_type_service_1.ContactTypeService])
     ], ApplicationDetailsComponent);
     return ApplicationDetailsComponent;
 }());

@@ -5,6 +5,7 @@ import {Component, Output, Input, EventEmitter} from '@angular/core';
 import {ServerConnector} from '../services/server-connector';
 import {FileAsset} from "../models/file-asset.model";
 import {JobApplication} from "../models/job-application.model"
+import {ContactTypeService} from "../services/contact-type.service";
 
 @Component({
     selector: 'application-details',
@@ -20,7 +21,7 @@ export class ApplicationDetailsComponent {
     isIcon: boolean = false;
 
 
-    constructor(private connector: ServerConnector) {
+    constructor(private connector: ServerConnector, private contactTypeService: ContactTypeService) {
     }
 
     closeSelf() {

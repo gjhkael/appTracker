@@ -61,6 +61,7 @@ var ServerConnector = (function () {
         configurable: true
     });
     ;
+    ;
     Object.defineProperty(ServerConnector, "FILE_ASSET", {
         get: function () {
             return "file-asset/";

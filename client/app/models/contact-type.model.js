@@ -16,4 +16,4 @@ var ContactType = (function (_super) {
     return ContactType;
 }(type_model_1.Type));
 exports.ContactType = ContactType;
-//# sourceMappingURL=contact-type.js.map
+//# sourceMappingURL=contact-type.model.js.map

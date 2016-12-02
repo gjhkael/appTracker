@@ -32,6 +32,10 @@ export class ServerConnector {
         return "file-type/"
     };
 
+    public static get CONTACT_TYPE(): string {
+        return "contact-type/"
+    };
+
     public static get FILE_ASSET(): string {
         return "file-asset/"
     };

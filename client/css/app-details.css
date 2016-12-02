@@ -40,6 +40,17 @@
     font-weight: 300;
 }
 
+.tabs {
+    margin-top: 10px;
+}
+
+.tab {
+    padding-left: 10px;
+    padding-right:10px;
+    padding-top: 5px;
+    font-size: .75rem;
+}
+
 .header {
     display: flex;
 }
@@ -58,11 +69,6 @@
     margin-top: 10px;
 }
 
-.files {
-    font-size: 1rem;
-    margin-top: 10px;
-}
-
 th {
     background-color: #3e6485;
     color: white;
@@ -74,4 +80,5 @@ tr:nth-child(even) {
 
 table {
     width: 100%;
+    font-size: .75rem;
 }

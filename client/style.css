@@ -100,3 +100,12 @@ button:hover {
     background-color: #3e6485;
     border: 1px solid #3e6485;
 }
+
+.nav-item:focus, .nav-item:hover, .nav-item.active {
+    background-color: #3e6485;
+    color:#ffffff;
+}
+
+a:focus, a:hover {
+    color: #ffffff;
+}
