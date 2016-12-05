@@ -14,10 +14,11 @@ import {TogglePipe} from '../pipes/toggle.pipe';
 import {FileTypeService} from "../services/file-type.service";
 import {ServerConnector} from "../services/server-connector";
 import {ContactTypeService} from "../services/contact-type.service";
+import {ModalComponent} from "../components/modal.component";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpModule, NgbModule.forRoot()],
-    declarations: [AppComponent, ApplicationDetailsComponent, ApplicationListComponent, FileUploadComponent, ApplicationItemComponent, SearchPipe, TogglePipe],
+    declarations: [AppComponent, ApplicationDetailsComponent, ApplicationListComponent, FileUploadComponent, ApplicationItemComponent, SearchPipe, TogglePipe, ModalComponent],
     bootstrap: [AppComponent],
     providers: [ServerConnector,
         {provide: FileTypeService, useClass: FileTypeService, useFactory: null},

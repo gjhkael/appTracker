@@ -1,6 +1,9 @@
-<div *ngIf="!hideFilter" class="applicationsearch">
-    <div class="card search">
+<div *ngIf="!hideFilter" class="applicationfilter">
+    <div class="card filter-open">
         <div *ngIf="!hideFilter" class="filters ">
+            <div class="filter-show" (click)="hideFilter = true">
+                <img src="images/minimize.png" alt="Close Filters">
+            </div>
             <h3>Filter</h3>
             <input [(ngModel)]="companyTxt" placeholder="Company name">
             <div [(ngModel)]="toggleSel" ngbRadioGroup name="radioBasic">
@@ -15,25 +18,21 @@
                 </label>
             </div>
         </div>
-        <div class="filter-show" (click)="hideFilter = true">
-            <img src="images/upCrt.png" alt="Close Filters">
-        </div>
     </div>
 </div>
-<div *ngIf="hideFilter" class="filter-show filter-closed-margins" (click)="hideFilter = false">
-    <img src="images/dwnCrt.png" alt="Open Filters">
+<div *ngIf="hideFilter" class="filter-closed card" (click)="hideFilter = false">
+    <div class="filter-show">
+        <img src="images/maximize.png" alt="Open Filters">
+    </div>
 </div>
-
 <div class="scroll-wrapper">
-    <ul *ngIf="companyTxt" class="applicationlist">
-        <li (click)="changeSelection(item); company='';" class="application"
-            *ngFor="let item of (applications) | text:companyTxt | toggle:toggleSel">
-            <application-item class="item-frame" [application]=item></application-item>
+    <ul class="applicationlist">
+        <li class="application">
+            <img src="images/add.png" alt="Create Application">
+            Create Application
         </li>
-    </ul>
-
-    <ul *ngIf="!companyTxt" class="applicationlist">
-        <li (click)="changeSelection(item);" class="application" *ngFor="let item of (applications) | toggle:toggleSel">
+        <li (click)="changeSelection(item); company='';" class="application"
+            *ngFor="let item of companyTxt?((applications) | text:companyTxt | toggle:toggleSel):((applications) | toggle:toggleSel)">
             <application-item class="item-frame" [application]=item></application-item>
         </li>
     </ul>

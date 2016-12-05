@@ -1,24 +1,24 @@
-.search {
+.filter-open {
     padding-top: 5px;
     min-width: 300px;
     margin-left: 8px;
     margin-right: 8px;
-    background: #696f7e;
+    background: #a4a1a3;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     color: white;
 }
 
-.search h1 {
+.filter-open h1 {
     margin-bottom: 10px;
 }
 
-.search label {
+.filter-open label {
     font-size: .75rem;
     text-align: left;
 }
 
-.search input {
+.filter-open input {
     width: 100%;
     display: inline-block;
     font-weight: 100;
@@ -37,35 +37,36 @@
 }
 
 .filter-show {
-    height: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    background: #696f7e;
+    float: right;
 }
 
 .filter-show:hover {
     background: #3e6485;
 }
 
-.filter-closed-margins {
+.filter-closed {
     margin-left: 8px;
     margin-right: 8px;
+    background: #a4a1a3;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .filter-show img {
-    height: 15px;
+    height: 16px;
 }
 
-.applicationsearch {
+.applicationfilter {
     display: flex;
     flex-direction: column;
-    min-height: 115px;
-    max-height: 115px;
+    min-height: 100px;
+    max-height: 100px;
 }
 
 .applicationlist {
@@ -103,7 +104,7 @@
     display: block;
     text-decoration: none;
 }
-
+.new-app:hover,
 .applicationlist li:hover {
     cursor: pointer;
     background: #3e6485;
@@ -121,9 +122,29 @@
     flex-direction: column;
 }
 
+.application img {
+    float: left;
+    height: 36px;
+    min-width: 0;
+    width: 36px;
+}
+
 .item-frame {
     display: flex;
     flex-direction: row;
+}
+
+.new-app {
+    border: 1px #3e6485 solid;
+    background: #ffffff;
+    color: #3e6485;
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 5px;
+    margin-left: 8px;
+    margin-right: 18px;
+    justify-content: center;
+    border-radius: 4px;
 }
 
 /*Hack to hide actual radio button outline */

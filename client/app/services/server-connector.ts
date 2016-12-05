@@ -24,10 +24,6 @@ export class ServerConnector {
         return "company/"
     };
 
-    public static get CONTACT_TYPE(): string {
-        return "contact-type/"
-    };
-
     public static get FILE_TYPE(): string {
         return "file-type/"
     };

@@ -84,7 +84,7 @@ var FileUploadComponent = (function () {
         core_1.Component({
             selector: 'file-upload',
             templateUrl: '../../html/file-upload.html',
-            styleUrls: ['../../css/file-upload.css', '../../css/mask.css']
+            styleUrls: ['../../css/file-upload.css'],
         }), 
         __metadata('design:paramtypes', [file_type_service_1.FileTypeService, server_connector_1.ServerConnector])
     ], FileUploadComponent);

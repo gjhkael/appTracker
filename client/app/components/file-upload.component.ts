@@ -10,7 +10,7 @@ import {FileTypeService} from "../services/file-type.service";
 @Component({
     selector: 'file-upload',
     templateUrl: '../../html/file-upload.html',
-    styleUrls: ['../../css/file-upload.css', '../../css/mask.css']
+    styleUrls: ['../../css/file-upload.css'],
 })
 export class FileUploadComponent {
     @Output() close = new EventEmitter();

@@ -20,25 +20,21 @@ var core_1 = require('@angular/core');
 var server_connector_1 = require('./server-connector');
 var marshallers_1 = require("../models/transformation/marshallers");
 var type_service_1 = require("./type.service");
+var Rx_1 = require("rxjs/Rx");
 var ContactTypeService = (function (_super) {
     __extends(ContactTypeService, _super);
     function ContactTypeService(connector) {
         var _this = this;
         _super.call(this, connector);
         this.connector = connector;
+        this.contactTypes = new Rx_1.ReplaySubject(1);
         this.getTypes(server_connector_1.ServerConnector.CONTACT_TYPE, marshallers_1.Marshallers.ContactType).subscribe(function (result) {
             result = result.slice(1);
-            for (var _i = 0, result_1 = result; _i < result_1.length; _i++) {
-                var contactType = result_1[_i];
-                _this.contactTypes[contactType.id] = contactType.type;
-            }
+            _this.contactTypes.next(result);
         });
     }
     ContactTypeService.prototype.getContactTypes = function () {
         return this.contactTypes;
-    };
-    ContactTypeService.prototype.getContactTypeName = function (id) {
-        return this.contactTypes[id];
     };
     ContactTypeService = __decorate([
         core_1.Injectable(), 

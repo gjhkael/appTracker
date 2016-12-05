@@ -1,0 +1,13 @@
+<div class="mask">
+    <div class="modal-content" [style.width]="width">
+        <div class="modal-header">
+            <div class="close">
+                <img src="../images/closeBtn.png" alt="Close" (click)="closeSelf()">
+            </div>
+            <div>{{modalTitle}}</div>
+        </div>
+        <div class="modal-body">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

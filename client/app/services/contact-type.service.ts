@@ -5,27 +5,24 @@ import {Injectable} from '@angular/core';
 import {ServerConnector} from './server-connector';
 import {Marshallers} from "../models/transformation/marshallers";
 import {TypeService} from "./type.service";
+import {ContactType} from "../models/contact-type.model";
+import {ReplaySubject, Observable} from "rxjs/Rx";
 
 @Injectable()
 export abstract class ContactTypeService extends TypeService {
-    contactTypes: {[key: number]: string};
+    contactTypes: ReplaySubject<ContactType[]> = new ReplaySubject<ContactType[]>(1);
 
     constructor(protected connector: ServerConnector) {
         super(connector);
         this.getTypes(ServerConnector.CONTACT_TYPE, Marshallers.ContactType).subscribe(result => {
-            result = result.slice(1);
-            for (let contactType of result) {
-                this.contactTypes[contactType.id] = contactType.type;
-            }
+            result=result.slice(1);
+            this.contactTypes.next(result);
         });
     }
 
-    public getContactTypes(): {[key: number]: string} {
+    public getContactTypes(): Observable<ContactType[]> {
         return this.contactTypes;
     }
 
-    public getContactTypeName(id: number): string {
-        return this.contactTypes[id];
-    }
 }
 

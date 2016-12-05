@@ -45,14 +45,6 @@ var ServerConnector = (function () {
         configurable: true
     });
     ;
-    Object.defineProperty(ServerConnector, "CONTACT_TYPE", {
-        get: function () {
-            return "contact-type/";
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ;
     Object.defineProperty(ServerConnector, "FILE_TYPE", {
         get: function () {
             return "file-type/";
@@ -61,6 +53,13 @@ var ServerConnector = (function () {
         configurable: true
     });
     ;
+    Object.defineProperty(ServerConnector, "CONTACT_TYPE", {
+        get: function () {
+            return "contact-type/";
+        },
+        enumerable: true,
+        configurable: true
+    });
     ;
     Object.defineProperty(ServerConnector, "FILE_ASSET", {
         get: function () {
