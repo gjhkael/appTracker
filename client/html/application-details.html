@@ -3,13 +3,13 @@
 <div class="card applicationinfo">
     <div class="application">
         <div class="close">
-            <img src="images/closeBtn.png" alt="Close" (click)="closeSelf()">
+            <img src="assets/images/closeBtn.png" alt="Close" (click)="closeSelf()">
         </div>
         <div class="header">
             <img *ngIf="application.company.iconId!=0" (click)="showAddFile=true; isIcon=true"
                  src="{{connector.getFileUrl(application.company.iconId)}}" alt="{{application.name}}">
             <img *ngIf="application.company.iconId==0" (click)="showAddFile=true; isIcon=true"
-                 src="images/add_image.png" alt="Add a company logo">
+                 src="assets/images/add_image.png" alt="Add a company logo">
 
             <div class="text" *ngIf="!editCompany">
                 <h1 (click)="editCompany=true">{{application.company.name}}</h1>

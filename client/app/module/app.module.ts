@@ -15,14 +15,20 @@ import {FileTypeService} from "../services/file-type.service";
 import {ServerConnector} from "../services/server-connector";
 import {ContactTypeService} from "../services/contact-type.service";
 import {ModalComponent} from "../components/modal.component";
+import {ApplicationInputComponent} from "../components/application-input.component";
+import {TinyMceComponent} from "../components/tiny-mce.component";
+import {CompanyService} from "../services/company.service";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, HttpModule, NgbModule.forRoot()],
-    declarations: [AppComponent, ApplicationDetailsComponent, ApplicationListComponent, FileUploadComponent, ApplicationItemComponent, SearchPipe, TogglePipe, ModalComponent],
+    declarations: [AppComponent, ApplicationDetailsComponent, ApplicationListComponent,
+        FileUploadComponent, ApplicationItemComponent, SearchPipe, TogglePipe, ModalComponent,
+        ApplicationInputComponent, TinyMceComponent],
     bootstrap: [AppComponent],
     providers: [ServerConnector,
         {provide: FileTypeService, useClass: FileTypeService, useFactory: null},
-        {provide: ContactTypeService, useClass: ContactTypeService, useFactory: null}]
+        {provide: ContactTypeService, useClass: ContactTypeService, useFactory: null},
+        {provide: CompanyService, useClass: CompanyService, useFactory: null}]
 })
 export class AppModule {
 }

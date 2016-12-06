@@ -33,8 +33,8 @@ export class FileUploadComponent {
         return "Please select a file type."
     };
 
-    constructor(private fileType: FileTypeService, private connector: ServerConnector) {
-        fileType.getFileTypes().subscribe(result => {
+    constructor(private fileTypeService: FileTypeService, private connector: ServerConnector) {
+        fileTypeService.getFileTypes().subscribe(result => {
             this.fileTypes = result;
         });
     };

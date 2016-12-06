@@ -1,10 +1,11 @@
+<app-input *ngIf="showAppInput" [application]="currentApplication" (close)="closeApplicationInput($event)"></app-input>
 <div class="app-wrap">
     <div class="app-header">AppTracker</div>
     <div class="app-frame">
         <application-list *ngIf="applications" class="list-frame" [applications]="applications"
-                          (selectionChanged)="showDetails($event)"></application-list>
+                          (selectionChanged)="handleSelection($event)"></application-list>
 
-        <application-details *ngIf="currentApplication" class="details-frame" [application]="currentApplication"
+        <application-details *ngIf="currentApplication && !showAppInput" class="details-frame" [application]="currentApplication"
                              (close)="closeDetails()"></application-details>
 
     </div>

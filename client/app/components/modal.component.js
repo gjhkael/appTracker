@@ -15,7 +15,7 @@ var core_1 = require('@angular/core');
 var ModalComponent = (function () {
     function ModalComponent() {
         this.close = new core_1.EventEmitter();
-        this.width = '500px';
+        this.width = '50%';
     }
     ModalComponent.prototype.closeSelf = function () {
         this.close.emit(null);

@@ -7,7 +7,7 @@
     </div>
     <div class="field">
       <b>Applied to</b>&nbsp;
-      <img src="images/{{application.appliedTo?'thumbsUp.png':'thumbsDwn.png'}}">
+      <img src="assets/images/{{application.appliedTo?'thumbsUp.png':'thumbsDwn.png'}}">
     </div>
     <div *ngIf="application.dateApplied" class="field">
       <b>Date applied:</b>&nbsp; {{application.dateApplied | date:"EEE MMM d"}}

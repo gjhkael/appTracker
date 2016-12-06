@@ -2,9 +2,6 @@ img {
   display: flex;
   float: left;
   height: 40px;
-  min-width: 53px;
-  -webkit-border-radius: 12px;
-  border-radius: 12px;
   margin-right: 10px;
   margin-bottom: 10px;
 }

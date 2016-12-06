@@ -13,6 +13,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  */
 var core_1 = require('@angular/core');
 var toggle_pipe_1 = require("../pipes/toggle.pipe");
+var job_application_model_1 = require("../models/job-application.model");
 var ApplicationListComponent = (function () {
     function ApplicationListComponent() {
         this.selectionChanged = new core_1.EventEmitter();
@@ -40,8 +41,10 @@ var ApplicationListComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    ApplicationListComponent.prototype.changeSelection = function (item) {
-        this.selectionChanged.emit(item);
+    ApplicationListComponent.prototype.changeSelection = function (application, modify) {
+        application = application ? application : new job_application_model_1.JobApplication();
+        modify = modify ? modify : false;
+        this.selectionChanged.emit({ application: application, modify: modify });
     };
     __decorate([
         core_1.Output(), 

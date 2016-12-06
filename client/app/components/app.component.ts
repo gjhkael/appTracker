@@ -4,42 +4,60 @@
 import {Component} from '@angular/core';
 import {JobApplication} from '../models/job-application.model';
 import {ApplicationService} from '../services/application.service'
-import {ServerConnector} from '../services/server-connector'
-
 
 @Component({
-  selector: 'my-app',
-  templateUrl: '../../html/app.html',
-  styleUrls: ['../../css/app.css'],
-  providers: [ApplicationService]
+    selector: 'my-app',
+    templateUrl: '../../html/app.html',
+    styleUrls: ['../../css/app.css'],
+    providers: [ApplicationService]
 })
 
 export class AppComponent {
 
-  constructor(private applicationService: ApplicationService) { }
+    constructor(private applicationService: ApplicationService) {
+    }
 
-  applications: JobApplication[];
-  currentApplication: JobApplication;
-  application: JobApplication;
-  editCompany: boolean = false;
+    applications: JobApplication[];
+    currentApplication: JobApplication;
+    application: JobApplication;
+    editCompany: boolean = false;
+    showAppInput: boolean = false;
 
-  ngOnInit(): void {
-    this.getApplications();
-  }
+    ngOnInit(): void {
+        this.getApplications();
+    }
 
-  getApplications(): void {
-    this.applicationService.getApplications().subscribe(
-        (data: JobApplication[]) => {
-          this.applications = data;
+    getApplications(): void {
+        this.applicationService.getApplications().subscribe(
+            (data: JobApplication[]) => {
+                this.applications = data;
+            }
+        );
+    }
+
+    handleSelection(item: any) {
+        if (!item.modify) {
+            this.showDetails(item.application);
+        } else {
+            this.showApplicationInput(item.application);
         }
-    );
-  }
+    }
 
-  showDetails(item) {
-    this.currentApplication = item;
-  }
+    showDetails(application: JobApplication) {
+        this.currentApplication = application;
+    }
 
-  closeDetails() {
-    this.currentApplication = null;
-  }
+    showApplicationInput(application: JobApplication) {
+        this.showAppInput = true;
+        this.currentApplication = application;
+    }
+
+    closeDetails() {
+        this.currentApplication = null;
+    }
+
+    closeApplicationInput() {
+        this.showAppInput = false;
+        this.currentApplication= this.currentApplication.id?this.currentApplication:null;
+    }
 }

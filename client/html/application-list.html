@@ -2,7 +2,7 @@
     <div class="card filter-open">
         <div *ngIf="!hideFilter" class="filters ">
             <div class="filter-show" (click)="hideFilter = true">
-                <img src="images/minimize.png" alt="Close Filters">
+                <img src="assets/images/minimize.png" alt="Close Filters">
             </div>
             <h3>Filter</h3>
             <input [(ngModel)]="companyTxt" placeholder="Company name">
@@ -22,18 +22,18 @@
 </div>
 <div *ngIf="hideFilter" class="filter-closed card" (click)="hideFilter = false">
     <div class="filter-show">
-        <img src="images/maximize.png" alt="Open Filters">
+        <img src="assets/images/maximize.png" alt="Open Filters">
     </div>
 </div>
 <div class="scroll-wrapper">
     <ul class="applicationlist">
-        <li class="application">
-            <img src="images/add.png" alt="Create Application">
-            Create Application
+        <li (click)="changeSelection(null,true);"class="application item-frame">
+            <img src="assets/images/add.png" alt="Create Application">
+            <div class="create-app"><h3>Create New Application</h3></div>
         </li>
-        <li (click)="changeSelection(item); company='';" class="application"
-            *ngFor="let item of companyTxt?((applications) | text:companyTxt | toggle:toggleSel):((applications) | toggle:toggleSel)">
-            <application-item class="item-frame" [application]=item></application-item>
+        <li (click)="changeSelection(application); company='';" class="application"
+            *ngFor="let application of companyTxt?((applications) | text:companyTxt | toggle:toggleSel):((applications) | toggle:toggleSel)">
+            <application-item class="item-frame" [application]=application></application-item>
         </li>
     </ul>
 </div>

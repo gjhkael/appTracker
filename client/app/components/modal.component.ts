@@ -13,7 +13,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 export class ModalComponent {
     @Output() close = new EventEmitter();
     @Input() modalTitle: string;
-    @Input() width: string = '500px';
+    @Input() width: string = '50%';
 
     closeSelf() {
         this.close.emit(null);

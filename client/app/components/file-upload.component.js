@@ -16,14 +16,14 @@ var file_asset_model_1 = require("../models/file-asset.model");
 var server_connector_1 = require("../services/server-connector");
 var file_type_service_1 = require("../services/file-type.service");
 var FileUploadComponent = (function () {
-    function FileUploadComponent(fileType, connector) {
+    function FileUploadComponent(fileTypeService, connector) {
         var _this = this;
-        this.fileType = fileType;
+        this.fileTypeService = fileTypeService;
         this.connector = connector;
         this.close = new core_1.EventEmitter();
         this.newFile = new file_asset_model_1.FileAsset;
         this.showError = false;
-        fileType.getFileTypes().subscribe(function (result) {
+        fileTypeService.getFileTypes().subscribe(function (result) {
             _this.fileTypes = result;
         });
     }

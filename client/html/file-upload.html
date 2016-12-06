@@ -1,10 +1,10 @@
 <mask-modal [modalTitle]="!isIcon?'Upload File':'Change Icon'" (close)="closeSelf()">
             <div class="dialog-error" *ngIf="showError">{{error}}</div>
             <input type="file" class="dialog-file" #file placeholder="Select a file">
-            <div class="dialog-type" *ngIf="contactTypes && !isIcon">
-                <div class="drop-label">File Type:</div>
-                <select class="drop-select" [(ngModel)]="contactTypeSel">
-                    <option *ngFor="let fileType of (contactTypes)" value="{{fileType.id}}">{{fileType.type}}</option>
+            <div class="dialog-input" *ngIf="fileTypes && !isIcon">
+                <div class="dialog-label">File Type:</div>
+                <select class="input-box" [(ngModel)]="fileTypeSel">
+                    <option *ngFor="let fileType of (fileTypes)" value="{{fileType.id}}">{{fileType.type}}</option>
                 </select>
             </div>
             <input *ngIf="!isIcon" type="text" class="dialog-description" [(ngModel)]="newFile.description"

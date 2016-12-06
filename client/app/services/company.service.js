@@ -14,12 +14,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var server_connector_1 = require('./server-connector');
 var marshallers_1 = require("../models/transformation/marshallers");
+var Rx_1 = require('rxjs/Rx');
 var CompanyService = (function () {
     function CompanyService(connector) {
+        var _this = this;
         this.connector = connector;
+        this.companies = new Rx_1.ReplaySubject(1);
+        this.connector.getEntities(server_connector_1.ServerConnector.COMPANY, marshallers_1.Marshallers.Company).subscribe(function (result) {
+            _this.companies.next(result);
+        });
     }
     CompanyService.prototype.getCompanies = function () {
-        return this.connector.getEntity(server_connector_1.ServerConnector.COMPANY, 2, marshallers_1.Marshallers.Company);
+        return this.companies;
+    };
+    CompanyService.prototype.reloadCompanies = function () {
+        var _this = this;
+        this.connector.getEntities(server_connector_1.ServerConnector.COMPANY, marshallers_1.Marshallers.Company).subscribe(function (result) {
+            _this.companies.next(result);
+        });
+        return this.companies;
     };
     CompanyService = __decorate([
         core_1.Injectable(), 

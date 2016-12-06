@@ -1,17 +1,33 @@
-<mask-modal [modalTitle]="Application Input" (close)="closeSelf()">
-            <div class="dialog-error" *ngIf="showError">{{error}}</div>
-            <input type="file" class="dialog-file" #file placeholder="Select a file">
-            <div class="dialog-type" *ngIf="contactTypes && !isIcon">
-                <div class="drop-label">File Type:</div>
-                <select class="drop-select" [(ngModel)]="application.contactType.id">
-                    <option *ngFor="let contactType of (contactTypes)" value="{{contactType.id}}">{{contactType.type}}</option>
-                </select>
-            </div>
-            <input type="text" class="dialog-description" [(ngModel)]="application."
-                   placeholder="File description">
+<mask-modal [modalTitle]="'Application Input'" [width]="'95%'" (close)="closeSelf()">
+    <div class="dialog-error" *ngIf="showError">{{error}}</div>
 
-            <div class="dialog-buttons">
-                <button name="submit" (click)="submit()">Create</button>
-                <button name="cancel" (click)="closeSelf()">Cancel</button>
+    <div class="header">
+        <div class="text">
+            <div *ngIf="searchCompanies" class="dialog-input">
+                <h4 class="dialog-label">Company Name: </h4>
+                <input class="input-box" required [(ngModel)]="application.company"
+                       [ngbTypeahead]="searchCompanies" [resultFormatter]="taFormatter" [inputFormatter]="taFormatter" name="name">
             </div>
+            <div class="dialog-input">
+                <h4 class="dialog-label">Company Address: </h4>
+                <input class="input-box" [(ngModel)]="application.company.address" name="address">
+            </div>
+
+        </div>
+    </div>
+    <h4>Notes:</h4>
+    <tiny-mce [elementId]="'app-notes'" (onEditorKeyup)="application.notes=$event"></tiny-mce>
+    <div class="dialog-input" *ngIf="contactTypes && !isIcon">
+
+        <h4 class="dialog-label">File Type:</h4>
+        <select class="input-box" [(ngModel)]="application.contactType.id">
+            <option *ngFor="let contactType of (contactTypes)" value="{{contactType.id}}">{{contactType.type}}</option>
+        </select>
+    </div>
+    <h4>Contact Info:</h4>
+    <tiny-mce [elementId]="'app-contact'" (onEditorKeyup)="application.contactInfo=$event"></tiny-mce>
+    <div class="dialog-buttons">
+        <button name="submit" (click)="submit()">Create</button>
+        <button name="cancel" (click)="closeSelf()">Cancel</button>
+    </div>
 </mask-modal>

@@ -17,6 +17,7 @@ var AppComponent = (function () {
     function AppComponent(applicationService) {
         this.applicationService = applicationService;
         this.editCompany = false;
+        this.showAppInput = false;
     }
     AppComponent.prototype.ngOnInit = function () {
         this.getApplications();
@@ -27,11 +28,27 @@ var AppComponent = (function () {
             _this.applications = data;
         });
     };
-    AppComponent.prototype.showDetails = function (item) {
-        this.currentApplication = item;
+    AppComponent.prototype.handleSelection = function (item) {
+        if (!item.modify) {
+            this.showDetails(item.application);
+        }
+        else {
+            this.showApplicationInput(item.application);
+        }
+    };
+    AppComponent.prototype.showDetails = function (application) {
+        this.currentApplication = application;
+    };
+    AppComponent.prototype.showApplicationInput = function (application) {
+        this.showAppInput = true;
+        this.currentApplication = application;
     };
     AppComponent.prototype.closeDetails = function () {
         this.currentApplication = null;
+    };
+    AppComponent.prototype.closeApplicationInput = function () {
+        this.showAppInput = false;
+        this.currentApplication = this.currentApplication.id ? this.currentApplication : null;
     };
     AppComponent = __decorate([
         core_1.Component({

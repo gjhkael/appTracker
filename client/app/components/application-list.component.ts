@@ -3,6 +3,7 @@
  */
 import {Component, Output, EventEmitter} from '@angular/core';
 import {TogglePipe} from "../pipes/toggle.pipe";
+import {JobApplication} from "../models/job-application.model";
 
 
 @Component({
@@ -31,8 +32,10 @@ export class ApplicationListComponent {
         return TogglePipe.NOT_APPLIED_TO;
     }
 
-    changeSelection(item) {
-        this.selectionChanged.emit(item);
+    changeSelection(application?: JobApplication, modify?: boolean){
+        application = application?application:new JobApplication();
+        modify = modify?modify:false;
+        this.selectionChanged.emit({application:application, modify:modify});
     }
 
 }
