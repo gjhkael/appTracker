@@ -1,25 +1,64 @@
 <mask-modal [modalTitle]="'Application Input'" [width]="'95%'" (close)="closeSelf()">
     <div class="dialog-error" *ngIf="showError">{{error}}</div>
 
-    <div class="header">
+    <div class="text-inputs">
         <div class="text">
             <div *ngIf="searchCompanies" class="dialog-input">
                 <h4 class="dialog-label">Company Name: </h4>
                 <input class="input-box" required [(ngModel)]="application.company"
-                       [ngbTypeahead]="searchCompanies" [resultFormatter]="taFormatter" [inputFormatter]="taFormatter" name="name">
+                       [ngbTypeahead]="searchCompanies" [resultFormatter]="taFormatter" [inputFormatter]="taFormatter"
+                       name="name">
             </div>
             <div class="dialog-input">
                 <h4 class="dialog-label">Company Address: </h4>
                 <input class="input-box" [(ngModel)]="application.company.address" name="address">
             </div>
+            <div class="dialog-input">
+                <h4 class="dialog-label">Position Applied For: </h4>
+                <input class="input-box" [(ngModel)]="application.position" name="position">
+            </div>
 
         </div>
+    </div>
+    <div class="applied-details">
+        <div class="date-input">
+            <div class="applied-label"><h4>Applied:</h4></div>
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary" [class.active]="application.appliedTo">
+                    <input type="checkbox" [(ngModel)]="application.appliedTo"> {{application.appliedTo?'Yes':'No'}}
+                </label>
+            </div>
+        </div>
+
+        <div *ngIf="application.appliedTo" class="date-input">
+            <div class="applied-label"><h4>Date Applied:</h4></div>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="applied"
+                       [(ngModel)]="application.dateApplied"
+                       ngbDatepicker #d1="ngbDatepicker">
+                <div class="input-group-addon" (click)="d1.toggle()">
+                    <img src="assets/images/calendar.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="application.appliedTo" class="date-input">
+            <div class="applied-label"><h4>Follow Up Date:</h4></div>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="followup"
+                       [(ngModel)]="application.followUp"
+                       ngbDatepicker #d2="ngbDatepicker">
+                <div class="input-group-addon" (click)="d2.toggle()">
+                    <img src="assets/images/calendar.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                </div>
+            </div>
+        </div>
+
     </div>
     <h4>Notes:</h4>
     <tiny-mce [elementId]="'app-notes'" (onEditorKeyup)="application.notes=$event"></tiny-mce>
     <div class="dialog-input" *ngIf="contactTypes && !isIcon">
 
-        <h4 class="dialog-label">File Type:</h4>
+        <h4 class="dialog-label">Contact Type:</h4>
         <select class="input-box" [(ngModel)]="application.contactType.id">
             <option *ngFor="let contactType of (contactTypes)" value="{{contactType.id}}">{{contactType.type}}</option>
         </select>

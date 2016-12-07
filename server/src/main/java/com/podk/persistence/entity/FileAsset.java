@@ -43,6 +43,9 @@ public class FileAsset extends Identifiable {
 		this.content = content;
 	}
 
+	public FileAsset(Integer id) {
+		this.id = id;
+	}
 	public FileType getFileType() {
 		return fileType;
 	}

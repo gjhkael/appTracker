@@ -20,7 +20,7 @@ public class Company extends Identifiable implements Uploads{
 
 	@JsonProperty(required = true)
 	@ApiModelProperty(notes = "The name of the company", required = true)
-	@Column(name = "name", nullable = false, updatable = true, length = 255)
+	@Column(name = "name", nullable = false, unique = true, updatable = false, length = 255)
 	@NotNull
 	private String name;
 
@@ -60,7 +60,7 @@ public class Company extends Identifiable implements Uploads{
 	}
 	
 	public Integer getIconId(){
-		return companyIcon==null?0:companyIcon.getId();
+		return companyIcon==null?new Integer(0):companyIcon.getId();
 	}
 
 	@Override

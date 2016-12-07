@@ -60,7 +60,7 @@ export class TinyMceComponent implements AfterViewInit, OnDestroy {
                     {title: '22pt', inline:'span', styles: { fontSize: '12px', 'font-size': '22px' } },
                     {title: '24pt', inline:'span', styles: { fontSize: '12px', 'font-size': '24px' } }
                 ]
-                }
+                },
                 {
                     title: "Headers",
                     items: [

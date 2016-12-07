@@ -55,6 +55,19 @@ public class ApplicationController extends BaseReadWriteController<Application> 
 			Company company = application.getCompany();
 			if (company.getId() == null) {
 				companyDao.save(company);
+			} else {
+				boolean save = false;
+				Company origCompany = companyDao.findOne(company.getId());
+				if (company.getAddress()!=null && company.getAddress()!=origCompany.getAddress()){
+					origCompany.setAddress(company.getAddress());
+					save = true;
+				}
+				if (company.getIconId()!=0 && company.getIconId()!=origCompany.getIconId()){
+					origCompany.setIcon(new FileAsset(company.getIconId()));
+					save = true;
+				}
+				if (save)
+				companyDao.save(origCompany);
 			}
 			applicationDao.save(application);
 		} catch (Exception ex) {
