@@ -46,8 +46,10 @@ var AppComponent = (function () {
     AppComponent.prototype.closeDetails = function () {
         this.currentApplication = null;
     };
-    AppComponent.prototype.closeApplicationInput = function () {
+    AppComponent.prototype.closeApplicationInput = function (newApp) {
         this.showAppInput = false;
+        if (newApp)
+            this.getApplications();
         this.currentApplication = this.currentApplication.id ? this.currentApplication : null;
     };
     AppComponent = __decorate([

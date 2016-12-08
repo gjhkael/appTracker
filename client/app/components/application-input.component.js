@@ -15,22 +15,26 @@ var core_1 = require("@angular/core");
 var server_connector_1 = require("../services/server-connector");
 var contact_type_service_1 = require("../services/contact-type.service");
 var job_application_model_1 = require("../models/job-application.model");
+var company_model_1 = require("../models/company.model");
 var company_service_1 = require("../services/company.service");
+var application_service_1 = require("../services/application.service");
 var ApplicationInputComponent = (function () {
-    function ApplicationInputComponent(contactTypeService, companyService, connector) {
+    function ApplicationInputComponent(contactTypeService, companyService, applicationService, connector) {
         var _this = this;
         this.contactTypeService = contactTypeService;
         this.companyService = companyService;
+        this.applicationService = applicationService;
         this.connector = connector;
         this.close = new core_1.EventEmitter();
         this.companies = [];
         this.showError = false;
+        this.isNew = false;
         this.searchCompanies = function (text$) {
             return text$
                 .debounceTime(200)
                 .distinctUntilChanged()
                 .map(function (term) { return term === '' ? []
-                : _this.companies.filter(function (v) { return new RegExp(term, 'gi').test(v.name); }).splice(0, 10); });
+                : _this.companies.filter(function (v) { return new RegExp(term, 'gi').test(v.name); }).splice(0, 9).concat(new company_model_1.Company({ "name": term })); });
         };
         this.taFormatter = function (x) { return x.name; };
         contactTypeService.getContactTypes().subscribe(function (result) {
@@ -41,8 +45,31 @@ var ApplicationInputComponent = (function () {
         });
     }
     ;
+    ApplicationInputComponent.prototype.validateInput = function () {
+        if (typeof (this.application.company) === 'string') {
+            var searchCompany_1 = this.application.company;
+            var foundCompany = this.companies.find(function (company) {
+                return company.name.toLowerCase() === searchCompany_1.toLowerCase();
+            });
+            if (foundCompany) {
+                this.application.company = foundCompany;
+            }
+            else {
+                this.application.company = new company_model_1.Company({ name: searchCompany_1 });
+            }
+        }
+    };
     ApplicationInputComponent.prototype.closeSelf = function () {
-        this.close.emit(null);
+        this.close.emit(this.isNew);
+    };
+    ApplicationInputComponent.prototype.submitApplication = function () {
+        var _this = this;
+        this.applicationService.postApplication(this.application).subscribe(function (data) {
+            _this.isNew = _this.application.id == null;
+            _this.application.id = data.id;
+            _this.application.contactType.type = data.contactType.type;
+            _this.closeSelf();
+        });
     };
     __decorate([
         core_1.Output(), 
@@ -58,7 +85,7 @@ var ApplicationInputComponent = (function () {
             templateUrl: '../../html/application-input.html',
             styleUrls: ['../../css/application-input.css'],
         }), 
-        __metadata('design:paramtypes', [contact_type_service_1.ContactTypeService, company_service_1.CompanyService, server_connector_1.ServerConnector])
+        __metadata('design:paramtypes', [contact_type_service_1.ContactTypeService, company_service_1.CompanyService, application_service_1.ApplicationService, server_connector_1.ServerConnector])
     ], ApplicationInputComponent);
     return ApplicationInputComponent;
 }());

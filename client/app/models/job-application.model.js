@@ -12,6 +12,9 @@ var JobApplication = (function (_super) {
     function JobApplication(applicationJson) {
         _super.call(this, applicationJson);
         applicationJson = applicationJson || {};
+        //If a Status json extract the application
+        if (applicationJson.message)
+            applicationJson = applicationJson.entity;
         this.company = applicationJson.company || new company_model_1.Company();
         this.tag = applicationJson.tag || '';
         this.position = applicationJson.position || '';

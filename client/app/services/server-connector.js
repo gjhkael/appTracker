@@ -83,6 +83,12 @@ var ServerConnector = (function () {
         uploadUrl += description ? '&fileDescription=' + description : '';
         return this._http.post(uploadUrl, formData);
     };
+    ServerConnector.prototype.postEntity = function (entityUri, entity, marshaller) {
+        var _this = this;
+        if (marshaller === void 0) { marshaller = null; }
+        return this._http.post(this.getEntityUrl(entityUri) + 'create', JSON.stringify(entity), { headers: this.headers })
+            .map(function (response) { return _this.fromJson(response, marshaller); });
+    };
     ServerConnector.prototype.getEntity = function (entityUri, id, marshaller) {
         var _this = this;
         if (marshaller === void 0) { marshaller = null; }

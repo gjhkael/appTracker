@@ -7,6 +7,7 @@ import {Observable} from 'rxjs/Rx';
 import {Marshaller, Marshallers} from "../models/transformation/marshallers";
 import 'rxjs/Rx';
 import {FileAsset} from "../models/file-asset.model";
+import {Identifiable} from "../models/identifiable.model";
 
 @Injectable()
 export class ServerConnector {
@@ -57,6 +58,11 @@ export class ServerConnector {
         uploadUrl += typeId ? '&fileTypeId=' + typeId : '';
         uploadUrl += description ? '&fileDescription=' + description : '';
         return this._http.post(uploadUrl, formData);
+    }
+
+    public postEntity(entityUri: string, entity: Identifiable, marshaller: Marshaller = null): Observable<any> {
+        return this._http.post(this.getEntityUrl(entityUri)+'create', JSON.stringify(entity), {headers: this.headers})
+            .map(response => this.fromJson(response, marshaller));
     }
 
     public getEntity(entityUri: string, id: number, marshaller: Marshaller = null): Observable<any> {

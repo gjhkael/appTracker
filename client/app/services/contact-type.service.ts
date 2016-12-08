@@ -15,7 +15,6 @@ export abstract class ContactTypeService extends TypeService {
     constructor(protected connector: ServerConnector) {
         super(connector);
         this.getTypes(ServerConnector.CONTACT_TYPE, Marshallers.ContactType).subscribe(result => {
-            result=result.slice(1);
             this.contactTypes.next(result);
         });
     }

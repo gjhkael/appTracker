@@ -8,6 +8,6 @@ export class Type extends Identifiable {
     constructor(typeJson?:any) {
         super(typeJson);
         typeJson=typeJson || {};
-        this.type=typeJson.type || '';
+        this.type=typeJson.type || null;
     }
 }

@@ -1,12 +1,19 @@
 <mask-modal [modalTitle]="'Application Input'" [width]="'95%'" (close)="closeSelf()">
     <div class="dialog-error" *ngIf="showError">{{error}}</div>
 
+    <template #rt let-r="result" let-t="term">
+        <span *ngIf="!r.id"><b>Add New: </b></span>
+        <img class="template-img" *ngIf="r.iconId && r.iconId!=0" src="{{connector.getFileUrl(r.iconId)}}" alt="{{application.name}}">
+        {{r.name}}
+    </template>
+
     <div class="text-inputs">
         <div class="text">
             <div *ngIf="searchCompanies" class="dialog-input">
                 <h4 class="dialog-label">Company Name: </h4>
                 <input class="input-box" required [(ngModel)]="application.company"
-                       [ngbTypeahead]="searchCompanies" [resultFormatter]="taFormatter" [inputFormatter]="taFormatter"
+                       [ngbTypeahead]="searchCompanies" [resultTemplate]="rt" [resultFormatter]="taFormatter"
+                       [focusFirst]=true [inputFormatter]="taFormatter" (blur)="validateInput()"
                        name="name">
             </div>
             <div class="dialog-input">
@@ -52,7 +59,7 @@
                 </div>
             </div>
         </div>
-
+        {{application|json}}
     </div>
     <h4>Notes:</h4>
     <tiny-mce [elementId]="'app-notes'" (onEditorKeyup)="application.notes=$event"></tiny-mce>
@@ -66,7 +73,7 @@
     <h4>Contact Info:</h4>
     <tiny-mce [elementId]="'app-contact'" (onEditorKeyup)="application.contactInfo=$event"></tiny-mce>
     <div class="dialog-buttons">
-        <button name="submit" (click)="submit()">Create</button>
+        <button name="submit" (click)="submitApplication()">Create</button>
         <button name="cancel" (click)="closeSelf()">Cancel</button>
     </div>
 </mask-modal>

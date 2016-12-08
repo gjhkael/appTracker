@@ -13,7 +13,7 @@ var Type = (function (_super) {
     function Type(typeJson) {
         _super.call(this, typeJson);
         typeJson = typeJson || {};
-        this.type = typeJson.type || '';
+        this.type = typeJson.type || null;
     }
     return Type;
 }(identifiable_model_1.Identifiable));

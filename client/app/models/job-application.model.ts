@@ -18,6 +18,9 @@ export class JobApplication extends Identifiable{
     constructor(applicationJson?: any) {
         super(applicationJson);
         applicationJson = applicationJson || {};
+        //If a Status json extract the application
+        if (applicationJson.message)
+            applicationJson = applicationJson.entity;
         this.company = applicationJson.company || new Company();
         this.tag = applicationJson.tag || '';
         this.position = applicationJson.position || '';

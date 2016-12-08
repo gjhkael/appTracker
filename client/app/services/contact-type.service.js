@@ -29,7 +29,6 @@ var ContactTypeService = (function (_super) {
         this.connector = connector;
         this.contactTypes = new Rx_1.ReplaySubject(1);
         this.getTypes(server_connector_1.ServerConnector.CONTACT_TYPE, marshallers_1.Marshallers.ContactType).subscribe(function (result) {
-            result = result.slice(1);
             _this.contactTypes.next(result);
         });
     }

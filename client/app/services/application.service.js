@@ -24,6 +24,9 @@ var ApplicationService = (function () {
     ApplicationService.prototype.getApplications = function () {
         return this.connector.getEntities(server_connector_1.ServerConnector.APPLICATION, marshallers_1.Marshallers.JobApplication);
     };
+    ApplicationService.prototype.postApplication = function (application) {
+        return this.connector.postEntity(server_connector_1.ServerConnector.APPLICATION, application, marshallers_1.Marshallers.JobApplication);
+    };
     ApplicationService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [server_connector_1.ServerConnector])

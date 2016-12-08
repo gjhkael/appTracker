@@ -56,8 +56,10 @@ export class AppComponent {
         this.currentApplication = null;
     }
 
-    closeApplicationInput() {
+    closeApplicationInput(newApp: boolean) {
         this.showAppInput = false;
+        if (newApp)
+            this.getApplications();
         this.currentApplication= this.currentApplication.id?this.currentApplication:null;
     }
 }

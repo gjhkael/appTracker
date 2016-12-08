@@ -19,4 +19,9 @@ export class ApplicationService{
     getApplications(): Observable<JobApplication[]> {
         return this.connector.getEntities(ServerConnector.APPLICATION, Marshallers.JobApplication)
     }
+
+    postApplication(application: JobApplication): Observable<JobApplication> {
+        return this.connector.postEntity(ServerConnector.APPLICATION, application, Marshallers.JobApplication)
+    }
+
 }

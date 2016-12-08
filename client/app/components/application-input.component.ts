@@ -8,7 +8,8 @@ import {ContactType} from "../models/contact-type.model";
 import {JobApplication} from "../models/job-application.model";
 import {Company} from "../models/company.model";
 import {CompanyService} from "../services/company.service";
-import {Observable} from "rxjs";
+import {Observable} from "rxjs/Rx";
+import {ApplicationService} from "../services/application.service";
 
 @Component({
     selector: 'app-input',
@@ -24,8 +25,10 @@ export class ApplicationInputComponent {
     error: string;
 
     showError: boolean = false;
+    item: any;
+    isNew: boolean = false;
 
-    constructor(private contactTypeService: ContactTypeService, private companyService: CompanyService, private connector: ServerConnector) {
+    constructor(private contactTypeService: ContactTypeService, private companyService: CompanyService, private applicationService: ApplicationService, private connector: ServerConnector) {
         contactTypeService.getContactTypes().subscribe(result => {
             this.contactTypes = result;
         });
@@ -39,11 +42,39 @@ export class ApplicationInputComponent {
             .debounceTime(200)
             .distinctUntilChanged()
             .map(term => term === '' ? []
-                : this.companies.filter(v => new RegExp(term, 'gi').test(v.name)).splice(0, 10));
+                : this.companies.filter(v => new RegExp(term, 'gi').test(v.name)).splice(0, 9).concat(new Company({"name": term})));
 
     taFormatter = (x: {name: string}) => x.name;
 
-    closeSelf() {
-        this.close.emit(null);
+    validateInput() {
+        if (typeof(this.application.company) === 'string') {
+            let searchCompany: any = this.application.company;
+            let foundCompany: Company = this.companies.find(function (company) {
+                return company.name.toLowerCase() === searchCompany.toLowerCase()
+            })
+
+            if (foundCompany) {
+                this.application.company = foundCompany;
+            } else {
+                this.application.company = new Company({name: searchCompany});
+            }
+        }
     }
+
+    closeSelf() {
+        this.close.emit(this.isNew);
+    }
+
+    submitApplication() {
+
+        this.applicationService.postApplication(this.application).subscribe(
+            (data: JobApplication) => {
+                this.isNew = this.application.id == null;
+                this.application.id = data.id;
+                this.application.contactType.type = data.contactType.type;
+                this.closeSelf();
+            }
+        );
+    }
+
 }
