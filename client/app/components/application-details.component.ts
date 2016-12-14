@@ -9,6 +9,7 @@ import {ContactTypeService} from "../services/contact-type.service";
 
 @Component({
     selector: 'application-details',
+    moduleId: module.id,
     templateUrl: '../../html/application-details.html',
     styleUrls: ['../../css/app-details.css'],
 })

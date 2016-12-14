@@ -8,6 +8,7 @@ import {JobApplication} from "../models/job-application.model";
 
 @Component({
     selector: 'application-list',
+    moduleId: module.id,
     templateUrl: '../../html/application-list.html',
     inputs: ['applications'],
     styleUrls: ['../../css/app-list.css'],

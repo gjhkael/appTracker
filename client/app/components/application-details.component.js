@@ -58,6 +58,7 @@ var ApplicationDetailsComponent = (function () {
     ApplicationDetailsComponent = __decorate([
         core_1.Component({
             selector: 'application-details',
+            moduleId: module.id,
             templateUrl: '../../html/application-details.html',
             styleUrls: ['../../css/app-details.css'],
         }), 

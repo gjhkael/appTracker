@@ -7,6 +7,7 @@ import {ApplicationService} from '../services/application.service'
 
 @Component({
     selector: 'my-app',
+    moduleId: module.id,
     templateUrl: '../../html/app.html',
     styleUrls: ['../../css/app.css'],
     providers: [ApplicationService]

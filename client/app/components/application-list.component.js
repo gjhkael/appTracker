@@ -53,6 +53,7 @@ var ApplicationListComponent = (function () {
     ApplicationListComponent = __decorate([
         core_1.Component({
             selector: 'application-list',
+            moduleId: module.id,
             templateUrl: '../../html/application-list.html',
             inputs: ['applications'],
             styleUrls: ['../../css/app-list.css'],

@@ -94,6 +94,7 @@ var ApplicationInputComponent = (function () {
     ApplicationInputComponent = __decorate([
         core_1.Component({
             selector: 'app-input',
+            moduleId: module.id,
             templateUrl: '../../html/application-input.html',
             styleUrls: ['../../css/application-input.css'],
         }), 

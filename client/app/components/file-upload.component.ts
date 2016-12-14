@@ -9,6 +9,7 @@ import {FileTypeService} from "../services/file-type.service";
 
 @Component({
     selector: 'file-upload',
+    moduleId: module.id,
     templateUrl: '../../html/file-upload.html',
     styleUrls: ['../../css/file-upload.css'],
 })

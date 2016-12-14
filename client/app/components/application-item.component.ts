@@ -6,6 +6,7 @@ import {ServerConnector} from '../services/server-connector';
 
 @Component ({
   selector: 'application-item',
+  moduleId: module.id,
   templateUrl: '../../html/application-item.html',
   styleUrls : ['../../css/app-item.css'],
   inputs: ['application']

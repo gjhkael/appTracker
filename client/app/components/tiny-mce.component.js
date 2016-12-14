@@ -103,6 +103,7 @@ var TinyMceComponent = (function () {
     TinyMceComponent = __decorate([
         core_1.Component({
             selector: 'tiny-mce',
+            moduleId: module.id,
             template: "<textarea id=\"{{elementId}}\"></textarea>"
         }), 
         __metadata('design:paramtypes', [])

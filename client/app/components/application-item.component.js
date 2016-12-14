@@ -20,6 +20,7 @@ var ApplicationItemComponent = (function () {
     ApplicationItemComponent = __decorate([
         core_1.Component({
             selector: 'application-item',
+            moduleId: module.id,
             templateUrl: '../../html/application-item.html',
             styleUrls: ['../../css/app-item.css'],
             inputs: ['application']

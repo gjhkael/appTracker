@@ -7,6 +7,7 @@ declare var tinymce: any;
 
 @Component({
     selector: 'tiny-mce',
+    moduleId: module.id,
     template: `<textarea id="{{elementId}}"></textarea>`
 })
 export class TinyMceComponent implements AfterViewInit, OnDestroy {

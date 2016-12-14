@@ -14,6 +14,7 @@ import {NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
     selector: 'app-input',
+    moduleId: module.id,
     templateUrl: '../../html/application-input.html',
     styleUrls: ['../../css/application-input.css'],
 })
