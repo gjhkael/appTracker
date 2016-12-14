@@ -18,17 +18,20 @@ var job_application_model_1 = require("../models/job-application.model");
 var company_model_1 = require("../models/company.model");
 var company_service_1 = require("../services/company.service");
 var application_service_1 = require("../services/application.service");
+var ng_bootstrap_1 = require('@ng-bootstrap/ng-bootstrap');
 var ApplicationInputComponent = (function () {
-    function ApplicationInputComponent(contactTypeService, companyService, applicationService, connector) {
+    function ApplicationInputComponent(contactTypeService, companyService, applicationService, connector, parserFormatter) {
         var _this = this;
         this.contactTypeService = contactTypeService;
         this.companyService = companyService;
         this.applicationService = applicationService;
         this.connector = connector;
+        this.parserFormatter = parserFormatter;
         this.close = new core_1.EventEmitter();
         this.companies = [];
         this.showError = false;
         this.isNew = false;
+        this.today = new Date();
         this.searchCompanies = function (text$) {
             return text$
                 .debounceTime(200)
@@ -64,6 +67,15 @@ var ApplicationInputComponent = (function () {
     };
     ApplicationInputComponent.prototype.submitApplication = function () {
         var _this = this;
+        if (this.application.appliedTo) {
+            //translate date structs into actual dates
+            this.application.dateApplied = new Date(this.parserFormatter.format(this.dateApplied));
+            this.application.followUp = new Date(this.parserFormatter.format(this.followUp));
+        }
+        else {
+            this.application.dateApplied = null;
+            this.application.followUp = null;
+        }
         this.applicationService.postApplication(this.application).subscribe(function (data) {
             _this.isNew = _this.application.id == null;
             _this.application.id = data.id;
@@ -85,7 +97,7 @@ var ApplicationInputComponent = (function () {
             templateUrl: '../../html/application-input.html',
             styleUrls: ['../../css/application-input.css'],
         }), 
-        __metadata('design:paramtypes', [contact_type_service_1.ContactTypeService, company_service_1.CompanyService, application_service_1.ApplicationService, server_connector_1.ServerConnector])
+        __metadata('design:paramtypes', [contact_type_service_1.ContactTypeService, company_service_1.CompanyService, application_service_1.ApplicationService, server_connector_1.ServerConnector, ng_bootstrap_1.NgbDateParserFormatter])
     ], ApplicationInputComponent);
     return ApplicationInputComponent;
 }());

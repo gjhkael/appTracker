@@ -3,7 +3,8 @@
 
     <template #rt let-r="result" let-t="term">
         <span *ngIf="!r.id"><b>Add New: </b></span>
-        <img class="template-img" *ngIf="r.iconId && r.iconId!=0" src="{{connector.getFileUrl(r.iconId)}}" alt="{{application.name}}">
+        <img class="template-img" *ngIf="r.iconId && r.iconId!=0" src="{{connector.getFileUrl(r.iconId)}}"
+             alt="{{application.name}}">
         {{r.name}}
     </template>
 
@@ -41,9 +42,10 @@
             <div class="applied-label"><h4>Date Applied:</h4></div>
             <div class="input-group">
                 <input class="form-control" placeholder="yyyy-mm-dd" name="applied"
-                       [(ngModel)]="application.dateApplied"
+                       [(ngModel)]="dateApplied"
                        ngbDatepicker #d1="ngbDatepicker">
-                <div class="input-group-addon" (click)="d1.toggle()">
+                <div class="input-group-addon" (click)="d1.toggle();
+                        dateApplied=dateApplied?dateApplied:{year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()}">
                     <img src="assets/images/calendar.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
                 </div>
             </div>
@@ -52,14 +54,14 @@
             <div class="applied-label"><h4>Follow Up Date:</h4></div>
             <div class="input-group">
                 <input class="form-control" placeholder="yyyy-mm-dd" name="followup"
-                       [(ngModel)]="application.followUp"
+                       [(ngModel)]="followUp"
                        ngbDatepicker #d2="ngbDatepicker">
-                <div class="input-group-addon" (click)="d2.toggle()">
+                <div class="input-group-addon" (click)="d2.toggle();
+                     followUp=followUp?followUp:{year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()}">
                     <img src="assets/images/calendar.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
                 </div>
             </div>
         </div>
-        {{application|json}}
     </div>
     <h4>Notes:</h4>
     <tiny-mce [elementId]="'app-notes'" (onEditorKeyup)="application.notes=$event"></tiny-mce>

@@ -10,6 +10,7 @@ import {Company} from "../models/company.model";
 import {CompanyService} from "../services/company.service";
 import {Observable} from "rxjs/Rx";
 import {ApplicationService} from "../services/application.service";
+import {NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-input',
@@ -28,7 +29,13 @@ export class ApplicationInputComponent {
     item: any;
     isNew: boolean = false;
 
-    constructor(private contactTypeService: ContactTypeService, private companyService: CompanyService, private applicationService: ApplicationService, private connector: ServerConnector) {
+    today = new Date();
+    dateApplied: NgbDateStruct;
+    followUp: NgbDateStruct;
+
+    constructor(private contactTypeService: ContactTypeService, private companyService: CompanyService,
+                private applicationService: ApplicationService, private connector: ServerConnector,
+                private parserFormatter: NgbDateParserFormatter) {
         contactTypeService.getContactTypes().subscribe(result => {
             this.contactTypes = result;
         });
@@ -67,6 +74,14 @@ export class ApplicationInputComponent {
 
     submitApplication() {
 
+        if (this.application.appliedTo) {
+            //translate date structs into actual dates
+            this.application.dateApplied = new Date(this.parserFormatter.format(this.dateApplied));
+            this.application.followUp = new Date(this.parserFormatter.format(this.followUp));
+        } else{
+            this.application.dateApplied =null;
+            this.application.followUp = null;
+        }
         this.applicationService.postApplication(this.application).subscribe(
             (data: JobApplication) => {
                 this.isNew = this.application.id == null;
