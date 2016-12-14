@@ -6,6 +6,7 @@
     height: 100%;
     opacity: 1;
     margin-bottom: 0;
+    overflow-y: auto;
 }
 
 .applicationinfo h1 {
