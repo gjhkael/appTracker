@@ -10,4 +10,9 @@ The application is a simple Java REST server built on [Spring Data JPA](http://p
 
 I have also implemented [SpringFox](http://springfox.github.io/springfox/) (swagger) on the server side to allow for easy manual REST testing and documentation.  This can be accessed via *server-URL*/swagger-ui.html
 
-:notebook:**Note:** *This is a work in progress and is not fully functional or polished*
+:notebook:**Note:** *This is a work in progress and is not fully functional, polished or secure.*
+
+#### Live Demo Server:
+Client: http://www.podk.com/appTracker/
+<br>REST Implementation (Swagger): http://podk.com:8080/swagger-ui.html
+<br>:notebook:**Note:** *A cron job is setup to reset the backend server on an hourly basis.*
